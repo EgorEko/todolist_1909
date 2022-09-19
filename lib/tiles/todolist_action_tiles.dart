@@ -11,14 +11,14 @@ import 'todolist_tile.dart';
 class TodoActionListTile extends StatelessWidget {
   TodoActionListTile({
     required this.todo,
-  }) : super(key: ValueKey(todo));
+  }) : super(key: ValueKey(todo.id));
 
   final Todo todo;
 
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      key: ValueKey(todo),
+      key: ValueKey(todo.id),
       endActionPane: ActionPane(
         motion: const ScrollMotion(),
         children: [

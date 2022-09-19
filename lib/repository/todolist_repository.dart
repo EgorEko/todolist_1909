@@ -7,7 +7,6 @@ class TodolistRepository {
     final box = await Hive.openBox<Todo>('todoListBox');
     final todos = box.values;
 
-    //Hive.box('todoListBox').clear();
     await Hive.close();
 
     return todos.toList();
@@ -18,6 +17,8 @@ class TodolistRepository {
 
     await box.put(todo.id, todo);
     await Hive.close();
+
+    print(box.toMap());
 
     return todo;
   }
