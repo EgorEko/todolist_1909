@@ -26,7 +26,7 @@ class TodolistApp extends StatelessWidget {
         Locale('en', ''), // English, no country code
         Locale('uk', ''), // Ukrainian, no country code
       ],
-      locale: const Locale('uk', ''),
+      locale: const Locale('en', ''),
     );
   }
 }
