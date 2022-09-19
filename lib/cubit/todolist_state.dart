@@ -7,6 +7,23 @@ abstract class TodolistState extends Equatable {
   List<Object> get props => [];
 }
 
+class TodolistStateActive extends TodolistState {
+  final String todo;
+
+  const TodolistStateActive(this.todo);
+
+  @override
+  List<Object> get props => [todo];
+
+  bool get isActive {
+    if (todo.isEmpty) {
+      return false;
+    }
+
+    return true;
+  }
+}
+
 class TodolistStateInitial extends TodolistState {}
 
 class TodolistStateWaiting extends TodolistState {}
