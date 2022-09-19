@@ -30,7 +30,7 @@ class Todo extends Equatable {
         name,
       ];
 
-  Todo copyWith({String? name, bool? checked, int? index}) => Todo._(
+  Todo copyWith({String? name}) => Todo._(
         id: id,
         name: name ?? this.name,
       );
