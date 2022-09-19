@@ -11,7 +11,6 @@ class TodolistApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Hello",
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
