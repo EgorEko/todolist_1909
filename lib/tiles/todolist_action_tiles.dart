@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../cubit/todolist_cubit.dart';
+import '../cubit/todolist_cubit/todolist_cubit.dart';
 import '../model/todo.dart';
 import 'todolist_tile.dart';
 

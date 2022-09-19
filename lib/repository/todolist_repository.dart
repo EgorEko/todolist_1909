@@ -18,8 +18,6 @@ class TodolistRepository {
     await box.put(todo.id, todo);
     await Hive.close();
 
-    print(box.toMap());
-
     return todo;
   }
 

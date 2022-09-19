@@ -20,13 +20,6 @@ class TodolistCubit extends Cubit<TodolistState> {
     });
   }
 
-  void onFolderChanged(String value) {
-    if (state is! TodolistStateActive && value.isEmpty) {
-      return;
-    }
-    emit(TodolistStateActive(value));
-  }
-
   Future<void> load() async {
     if (state is TodolistStateInitial) {
       try {

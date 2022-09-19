@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubit/todolist_cubit.dart';
+import '../cubit/todolist_cubit/todolist_cubit.dart';
 import '../tiles/todolist_action_tiles.dart';
 
 class TodolistWidget extends StatelessWidget {
