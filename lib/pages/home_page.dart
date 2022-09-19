@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-  final String title;
+class HomePage extends StatefulWidget {
+  const HomePage({
+    super.key,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -14,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Center(child: Text(AppLocalizations.of(context).todolist)),
       ),
       body: const Center(
         child: Text('Hello'),
