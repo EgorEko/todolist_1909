@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../cubit/todolist_cubit.dart';
+import '../widgets/todo_field_widget.dart';
+import '../widgets/todolist_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -42,25 +44,7 @@ class _HomePageState extends State<HomePage> {
                   Flexible(
                     child: BlocBuilder<TodolistCubit, TodolistState>(
                       builder: (context, state) {
-                        return TextField(
-                          onChanged: (value) {
-                            context
-                                .read<TodolistCubit>()
-                                .onFolderChanged(value);
-                          },
-                          controller: noteText,
-                          autofocus: true,
-                          decoration: InputDecoration(
-                            fillColor: Colors.blue.shade200,
-                            filled: true,
-                            hintText:
-                                AppLocalizations.of(context).typeYourNewTodo,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                              borderSide: const BorderSide(color: Colors.grey),
-                            ),
-                          ),
-                        );
+                        return TodoFieldWidget(noteText: noteText);
                       },
                     ),
                   ),
@@ -80,6 +64,7 @@ class _HomePageState extends State<HomePage> {
                       return ElevatedButton(
                         onPressed: state
                             ? () async {
+                                noteText.clear();
                                 await context
                                     .read<TodolistCubit>()
                                     .addTodo(noteText.text);
@@ -99,6 +84,10 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            const SizedBox(
+              height: 8,
+            ),
+            const TodolistWidget(),
           ],
         ),
       ),

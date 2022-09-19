@@ -4,15 +4,17 @@ import '../model/todo.dart';
 
 class TodolistRepository {
   Future<List<Todo>> loadAll() async {
-    final box = await Hive.openBox<Todo>('todoBox');
+    final box = await Hive.openBox<Todo>('todoListBox');
     final todos = box.values;
+
+    //Hive.box('todoListBox').clear();
     await Hive.close();
 
     return todos.toList();
   }
 
   Future<Todo> add(Todo todo) async {
-    final box = await Hive.openBox<Todo>('todoBox');
+    final box = await Hive.openBox<Todo>('todoListBox');
 
     await box.put(todo.id, todo);
     await Hive.close();
@@ -21,7 +23,7 @@ class TodolistRepository {
   }
 
   Future<void> deleteTodoItem(Todo todo) async {
-    final box = await Hive.openBox<Todo>('todoBox');
+    final box = await Hive.openBox<Todo>('todoListBox');
     await box.delete(todo.id);
 
     await Hive.close();
