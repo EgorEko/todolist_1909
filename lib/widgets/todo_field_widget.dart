@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../cubit/todolist_cubit.dart';
+import '../cubit/active_cubit/activate_cubit.dart';
 
 class TodoFieldWidget extends StatelessWidget {
   const TodoFieldWidget({
@@ -16,7 +16,7 @@ class TodoFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: (value) {
-        context.read<TodolistCubit>().onFolderChanged(value);
+        context.read<ActivateCubit>().onFieldChanged(value);
       },
       controller: noteText,
       autofocus: true,

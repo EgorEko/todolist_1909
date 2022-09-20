@@ -10,28 +10,31 @@ class Todo extends Equatable {
   final String id;
   @HiveField(1)
   final String name;
+  @HiveField(2)
+  final int index;
 
   Todo({
     String? id,
     required String name,
+    required int index,
   }) : this._(
           id: id ?? const Uuid().v4(),
           name: name,
+          index: index,
         );
 
   const Todo._({
     required this.id,
     required this.name,
+    required this.index,
   });
 
   @override
-  List<Object?> get props => [
-        id,
-        name,
-      ];
+  List<Object?> get props => [id, name, index];
 
-  Todo copyWith({String? name}) => Todo._(
+  Todo copyWith({String? name, int? index}) => Todo._(
         id: id,
         name: name ?? this.name,
+        index: index ?? this.index,
       );
 }

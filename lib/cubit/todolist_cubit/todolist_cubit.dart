@@ -4,14 +4,14 @@ import 'package:rxdart/rxdart.dart';
 import 'package:collection/collection.dart';
 
 import '../../model/todo.dart';
-import '../../services/todolist_service.dart';
+import '../../repository/todolist_repository.dart';
 
 part 'todolist_state.dart';
 
 class TodolistCubit extends Cubit<TodolistState> {
-  final TodolistService todolistService;
+  final TodolistRepository todolistRepository;
 
-  TodolistCubit(this.todolistService) : super(TodolistStateInitial());
+  TodolistCubit(this.todolistRepository) : super(TodolistStateInitial());
 
   @override
   Stream<TodolistState> get stream {
@@ -20,23 +20,20 @@ class TodolistCubit extends Cubit<TodolistState> {
     });
   }
 
-  void onFolderChanged(String value) {
-    if (state is! TodolistStateActive && value.isEmpty) {
-      return;
-    }
-    emit(TodolistStateActive(value));
-  }
-
   Future<void> load() async {
     if (state is TodolistStateInitial) {
       try {
-        final items = await todolistService.loadAll();
+        final items = await todolistRepository.loadAll();
 
-        emit(
-          TodolistStateSucceed(
-            [...items],
-          ),
-        );
+        if (items.isEmpty) {
+          emit(TodolistStateEmpty());
+        } else {
+          emit(
+            TodolistStateSucceed(
+              [...items.sorted((a, b) => a.index - b.index)],
+            ),
+          );
+        }
       } catch (e) {
         emit(TodolistStateFailed(e.toString()));
       }
@@ -50,23 +47,23 @@ class TodolistCubit extends Cubit<TodolistState> {
       if (currentState is TodolistStateSucceed) {
         todo = Todo(
           name: todoTitle,
+          index: (currentState.todo.map((e) => e.index).maxOrNull ?? 0) + 1,
         );
         emit(TodolistStateSucceed([...currentState.todo, todo]));
       } else {
-        todo = Todo(
-          name: todoTitle,
-        );
+        todo = Todo(name: todoTitle, index: 0);
         emit(TodolistStateSucceed([todo]));
       }
-      await todolistService.addTodoItem(todo);
+      await todolistRepository.add(todo);
     } catch (e) {
       final currentState = state;
       if (currentState is TodolistStateSucceed) {
         final todo = Todo(
           name: todoTitle,
+          index: (currentState.todo.map((e) => e.index).maxOrNull ?? 0) + 1,
         );
         final items = currentState.todo.whereNot(
-          (element) => element.id == todo.id,
+          (element) => element.index == todo.index,
         );
         emit(TodolistStateSucceed([...items]));
       }
@@ -78,12 +75,12 @@ class TodolistCubit extends Cubit<TodolistState> {
       final currentState = state;
       if (currentState is TodolistStateSucceed) {
         final items = currentState.todo.whereNot(
-          (element) => element.id == todo.id,
+          (element) => element.index == todo.index,
         );
         emit(TodolistStateSucceed([...items]));
       }
 
-      await todolistService.deleteTodoItem(todo);
+      await todolistRepository.delete(todo);
     } catch (e) {
       emit(TodolistStateFailed(e.toString()));
     }

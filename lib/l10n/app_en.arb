@@ -1,7 +1,7 @@
 {
     "todolist": "TODO List",
     "delete": "Delete",
-    "addNewItem":"Add todo new item",
     "typeYourNewTodo":"Type your new todo",
-    "addTodo": "Add Todo"
+    "addTodo": "Add Todo",
+   "dataNotFound": "No data was found"
 }

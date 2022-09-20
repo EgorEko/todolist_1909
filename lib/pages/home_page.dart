@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../cubit/todolist_cubit.dart';
+import '../cubit/active_cubit/activate_cubit.dart';
+import '../cubit/todolist_cubit/todolist_cubit.dart';
 import '../widgets/todo_field_widget.dart';
 import '../widgets/todolist_widget.dart';
 
@@ -51,23 +52,15 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     width: 8,
                   ),
-                  BlocSelector<TodolistCubit, TodolistState, bool>(
-                    selector: (state) {
-                      if (state is TodolistStateActive) {
-                        return state.isActive;
-                      } else if (state is TodolistStateFailed) {
-                        return true;
-                      }
-                      return false;
-                    },
+                  BlocBuilder<ActivateCubit, bool>(
                     builder: (context, state) {
                       return ElevatedButton(
                         onPressed: state
                             ? () async {
-                                noteText.clear();
                                 await context
                                     .read<TodolistCubit>()
                                     .addTodo(noteText.text);
+                                noteText.clear();
                               }
                             : null,
                         child: SizedBox(
