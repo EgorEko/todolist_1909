@@ -6,6 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../cubit/todolist_cubit/todolist_cubit.dart';
 import '../model/todo.dart';
+import '../utils/colors_constants.dart';
 import 'todolist_tile.dart';
 
 class TodoActionListTile extends StatelessWidget {
@@ -28,8 +29,8 @@ class TodoActionListTile extends StatelessWidget {
             onPressed: (value) {
               context.read<TodolistCubit>().deleteTodo(todo);
             },
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
+            backgroundColor: kColorsRed,
+            foregroundColor: kColorsWhite,
             icon: Icons.delete,
             label: AppLocalizations.of(context).delete,
           ),

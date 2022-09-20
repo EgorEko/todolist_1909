@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../cubit/active_cubit/activate_cubit.dart';
+import '../utils/colors_constants.dart';
 
 class TodoFieldWidget extends StatelessWidget {
   const TodoFieldWidget({
@@ -21,12 +22,12 @@ class TodoFieldWidget extends StatelessWidget {
       controller: noteText,
       autofocus: true,
       decoration: InputDecoration(
-        fillColor: Colors.blue.shade200,
+        fillColor: kColorsBlue.shade200,
         filled: true,
         hintText: AppLocalizations.of(context).typeYourNewTodo,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide: const BorderSide(color: Colors.grey),
+          borderSide: const BorderSide(color: kColorsGrey),
         ),
       ),
     );

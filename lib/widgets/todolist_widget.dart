@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../cubit/todolist_cubit/todolist_cubit.dart';
 import '../tiles/todolist_action_tile.dart';
+import '../utils/colors_constants.dart';
 
 class TodolistWidget extends StatelessWidget {
   const TodolistWidget({super.key});
@@ -42,11 +43,13 @@ class TodolistWidget extends StatelessWidget {
                     ),
                   ),
                   Center(
-                    child: Text(AppLocalizations.of(context).dataNotFound,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                        )),
+                    child: Text(
+                      AppLocalizations.of(context).dataNotFound,
+                      style: const TextStyle(
+                        color: kColorsWhite,
+                        fontSize: 30,
+                      ),
+                    ),
                   ),
                 ],
               ),
