@@ -25,8 +25,31 @@ class TodolistWidget extends StatelessWidget {
           } else if (state is TodolistStateInitial) {
             context.read<TodolistCubit>().load();
           } else if (state is TodolistStateEmpty) {
-            return Center(
-              child: Text(AppLocalizations.of(context).dataNotFound),
+            return SafeArea(
+              child: Stack(
+                children: [
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height * 0.7,
+                        minWidth: MediaQuery.of(context).size.width * 1.5,
+                      ),
+                      child: const Image(
+                        image: NetworkImage(
+                          'https://images.unsplash.com/photo-1609743522653-52354461eb27?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+                        ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Text(AppLocalizations.of(context).dataNotFound,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                        )),
+                  ),
+                ],
+              ),
             );
           }
           return const Center(child: CircularProgressIndicator());
